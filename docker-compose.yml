@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models
+    command: ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+    networks:
+      - mlops-network
+
+  streamlit:
+    build: .
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./models:/app/models
+    command: ["streamlit", "run", "streamlit_app.py", "--server.address", "0.0.0.0", "--server.port", "8501"]
+    depends_on:
+      - api
+    networks:
+      - mlops-network
+
+networks:
+  mlops-network:
+    driver: bridge

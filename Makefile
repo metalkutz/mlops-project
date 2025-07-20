@@ -12,6 +12,12 @@ run:
 mlflow:
 	.venv/bin/mlflow ui
 
+streamlit:
+	.venv/bin/streamlit run streamlit_app.py
+
+api:
+	.venv/bin/uvicorn app:app --reload
+
 test:
 	$(python) -m pytest
 		

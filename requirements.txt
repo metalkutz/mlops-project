@@ -1,6 +1,8 @@
 dvc
 dvc-gdrive
 streamlit
+plotly
+scikit-learn
 joblib==1.4.2
 requests
 fastapi==0.110.0
