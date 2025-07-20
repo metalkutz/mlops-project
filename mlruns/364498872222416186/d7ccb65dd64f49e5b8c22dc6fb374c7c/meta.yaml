@@ -1,0 +1,15 @@
+artifact_uri: file:///media/benjamin/Titan-micro/code/mlops-project/mlruns/364498872222416186/d7ccb65dd64f49e5b8c22dc6fb374c7c/artifacts
+end_time: 1753023700168
+entry_point_name: ''
+experiment_id: '364498872222416186'
+lifecycle_stage: active
+run_id: d7ccb65dd64f49e5b8c22dc6fb374c7c
+run_name: honorable-bug-370
+run_uuid: d7ccb65dd64f49e5b8c22dc6fb374c7c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1753023695906
+status: 3
+tags: []
+user_id: benjamin

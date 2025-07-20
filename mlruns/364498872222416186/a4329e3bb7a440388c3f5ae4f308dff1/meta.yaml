@@ -1,0 +1,15 @@
+artifact_uri: file:///media/benjamin/Titan-micro/code/mlops-project/mlruns/364498872222416186/a4329e3bb7a440388c3f5ae4f308dff1/artifacts
+end_time: 1753023520357
+entry_point_name: ''
+experiment_id: '364498872222416186'
+lifecycle_stage: active
+run_id: a4329e3bb7a440388c3f5ae4f308dff1
+run_name: delicate-stag-43
+run_uuid: a4329e3bb7a440388c3f5ae4f308dff1
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1753023520170
+status: 4
+tags: []
+user_id: benjamin

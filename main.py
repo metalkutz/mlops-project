@@ -84,10 +84,10 @@ def train_with_mlflow():
         # Log metrics
         model_params = config['model']['params']
         mlflow.log_params(model_params)
-        mlflow.log_metric("accuracy", accuracy)
-        mlflow.log_metric("roc", roc_auc_score)
-        mlflow.log_metric('precision', report['weighted avg']['precision'])
-        mlflow.log_metric('recall', report['weighted avg']['recall'])
+        mlflow.log_metric("accuracy", float(accuracy))
+        mlflow.log_metric("roc", float(roc_auc_score))
+        mlflow.log_metric('precision', float(report['weighted avg']['precision']))
+        mlflow.log_metric('recall', float(report['weighted avg']['recall']))
         mlflow.sklearn.log_model(trainer.pipeline, "model")
                 
         # Register the model
