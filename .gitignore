@@ -84,6 +84,11 @@ log/
 tensorboard/
 runs/
 
+# DVC
+/.dvc/config.local
+/.dvc/tmp
+/.dvc/cache
+
 # Results
 results/
 output/
@@ -109,3 +114,4 @@ Thumbs.db
 # Others
 *.swp
 *.swo
+/data
