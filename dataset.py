@@ -1,36 +1,37 @@
-# Sample data extraction file which generate a classification dataset using sklearn.datasets
-from sklearn.datasets import make_classification
+# Sample data extraction file which loads the breast cancer dataset from sklearn.datasets
 import pandas as pd
 import os
+from sklearn.datasets import load_breast_cancer
 
 def extract_data():
     if not os.path.exists("data"):
         os.mkdir("data")
     
-    append_mode = os.path.isfile("data/train.csv")
+    # Load the breast cancer dataset
+    breast_cancer = load_breast_cancer()
+    X, y = breast_cancer.data, breast_cancer.target
+    
+    # Create DataFrame with feature names
+    df = pd.DataFrame(X, columns=breast_cancer['feature_names'])
+    df['target'] = y
+    
+    # Split data into train and test sets (80-20 split)
+    train_size = int(0.8 * len(df))
+    train_data = df.iloc[:train_size]
+    test_data = df.iloc[train_size:]
+    
+    # Save to CSV files
+    train_data.to_csv("data/train.csv", index=False)
+    test_data.to_csv("data/test.csv", index=False)
+    
+    # Create a production dataset (same as test for this example)
+    test_data.to_csv("data/production.csv", index=False)
 
-    num_datasets = 10 if not append_mode else 1
-
-    for _ in range(num_datasets):
-        X, y = make_classification(
-            n_samples=10000, 
-            n_features=10, 
-            n_informative=8, 
-            n_redundant=2, 
-            n_classes=2, 
-            random_state=42
-            )
-        
-        df = pd.DataFrame(X, columns=[f'feature_{i}' for i in range(X.shape[1])])
-        df['target'] = y
-        
-        train_data = df.iloc[:8000]
-        test_data = df.iloc[8000:]
-        
-        train_data.to_csv("data/train.csv", mode="a", header=not append_mode, index=False)
-        test_data.to_csv("data/test.csv", mode="a", header=not append_mode, index=False)
-
-    print("Extracted data from source successfully")
+    print(f"Extracted breast cancer dataset successfully")
+    print(f"Train samples: {len(train_data)}")
+    print(f"Test samples: {len(test_data)}")
+    print(f"Features: {len(breast_cancer.feature_names)}")
+    print(f"Target classes: {list(breast_cancer.target_names)}")
 
 if __name__ == "__main__":
     extract_data()

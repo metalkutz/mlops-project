@@ -1,14 +1,14 @@
-# MLOps Project
+# MLOps Project - Breast Cancer Prediction
 
-This repository contains a complete MLOps pipeline for building, training, and deploying machine learning models with experiment tracking, data versioning, and automated deployment capabilities.
+This repository contains a complete MLOps pipeline for building, training, and deploying machine learning models for breast cancer diagnosis prediction with experiment tracking, data versioning, and automated deployment capabilities.
 
 ## 🚀 Features
 
-- **Data Pipeline**: Automated data ingestion, cleaning, and preprocessing
+- **Data Pipeline**: Automated data ingestion, cleaning, and preprocessing for breast cancer dataset
 - **Model Training**: Configurable model training with multiple algorithms (Decision Tree, Random Forest, Gradient Boosting)
 - **Experiment Tracking**: MLflow integration for tracking experiments, metrics, and model versioning
 - **Data Versioning**: DVC integration for data version control
-- **Model Deployment**: FastAPI-based REST API for model serving
+- **Model Deployment**: FastAPI-based REST API for breast cancer prediction serving
 - **Testing**: Comprehensive test suite with pytest
 - **Containerization**: Docker support for deployment
 - **Pipeline Orchestration**: Modular pipeline architecture
@@ -46,7 +46,7 @@ This repository contains a complete MLOps pipeline for building, training, and d
 
 ### Quick Start
 
-1. **Generate sample data** (optional):
+1. **Generate breast cancer dataset**:
 
     ```bash
     python dataset.py
@@ -80,13 +80,36 @@ This repository contains a complete MLOps pipeline for building, training, and d
     curl -X POST "http://localhost:8000/predict" \
          -H "Content-Type: application/json" \
          -d '{
-           "Gender": "Male",
-           "Age": 30,
-           "HasDrivingLicense": 1,
-           "RegionID": 1.0,
-           "Switch": 0,
-           "PastAccident": "No",
-           "AnnualPremium": 25000.0
+           "mean_radius": 17.99,
+           "mean_texture": 10.38,
+           "mean_perimeter": 122.8,
+           "mean_area": 1001.0,
+           "mean_smoothness": 0.1184,
+           "mean_compactness": 0.2776,
+           "mean_concavity": 0.3001,
+           "mean_concave_points": 0.1471,
+           "mean_symmetry": 0.2419,
+           "mean_fractal_dimension": 0.07871,
+           "radius_error": 1.095,
+           "texture_error": 0.9053,
+           "perimeter_error": 8.589,
+           "area_error": 153.4,
+           "smoothness_error": 0.006399,
+           "compactness_error": 0.04904,
+           "concavity_error": 0.05373,
+           "concave_points_error": 0.01587,
+           "symmetry_error": 0.03003,
+           "fractal_dimension_error": 0.006193,
+           "worst_radius": 25.38,
+           "worst_texture": 17.33,
+           "worst_perimeter": 184.6,
+           "worst_area": 2019.0,
+           "worst_smoothness": 0.1622,
+           "worst_compactness": 0.6656,
+           "worst_concavity": 0.7119,
+           "worst_concave_points": 0.2654,
+           "worst_symmetry": 0.4601,
+           "worst_fractal_dimension": 0.1189
          }'
     ```
 
@@ -101,7 +124,7 @@ mlops-project/
 ├── 🔧 steps/                   # Pipeline components
 │   ├── __init__.py
 │   ├── ingest.py              # Data ingestion step
-│   ├── clean.py               # Data cleaning step
+│   ├── preprocessing.py       # Data preprocessing step (cleaning & scaling)
 │   ├── train.py               # Model training step
 │   └── predict.py             # Prediction step
 ├── 🤖 models/                  # Trained models
@@ -112,7 +135,7 @@ mlops-project/
 ├── 🚀 app.py                  # FastAPI application
 ├── 🐳 dockerfile             # Docker configuration
 ├── 🔧 main.py                 # Main pipeline script
-├── 📊 dataset.py              # Data generation script
+├── 📊 dataset.py              # Breast cancer data generation script
 ├── 🏗️ Makefile               # Build automation
 ├── 📦 requirements.txt        # Python dependencies
 ├── 📋 data.dvc               # DVC data tracking
@@ -137,42 +160,74 @@ model:
 
 The ML pipeline consists of several modular steps:
 
-1. **Data Ingestion** (`steps/ingest.py`): Loads training and test datasets
-2. **Data Cleaning** (`steps/clean.py`): Handles missing values and data preprocessing
+1. **Data Ingestion** (`steps/ingest.py`): Loads breast cancer training and test datasets
+2. **Data Preprocessing** (`steps/preprocessing.py`): 
+   - Feature standardization using StandardScaler
+   - Outlier detection and removal (conservative approach for medical data)
+   - Data validation and quality checks
 3. **Model Training** (`steps/train.py`):
-   - Preprocessing with StandardScaler, OneHotEncoder, MinMaxScaler
-   - SMOTE for handling class imbalance
+   - SMOTE for handling class imbalance (malignant vs benign)
    - Configurable model training (Decision Tree, Random Forest, Gradient Boosting)
-4. **Model Evaluation** (`steps/predict.py`): Generates accuracy, ROC-AUC, precision, and recall metrics
+   - Pipeline optimization for breast cancer features
+4. **Model Evaluation** (`steps/predict.py`): Generates accuracy, ROC-AUC, precision, and recall metrics for cancer diagnosis
 
 ## 📊 Experiment Tracking
 
 The project integrates with MLflow for comprehensive experiment tracking:
 
-- **Metrics**: Accuracy, ROC-AUC, Precision, Recall
+- **Metrics**: Accuracy, ROC-AUC, Precision, Recall for cancer diagnosis
 - **Parameters**: Model hyperparameters from config
-- **Artifacts**: Trained models with input signatures
-- **Model Registry**: Automatic model registration as "insurance_model"
+- **Artifacts**: Trained models with input signatures for breast cancer features
+- **Model Registry**: Automatic model registration as "breast_cancer_model"
 
 Access the MLflow UI at `http://localhost:5000` after running `make mlflow`.
 
 ## 🚀 API Usage
 
-The FastAPI application provides a REST endpoint for predictions:
+The FastAPI application provides a REST endpoint for breast cancer predictions:
+
+### Endpoints
+
+- **GET** `/`: Health check and API information
+- **GET** `/info`: Detailed information about features and model
+- **POST** `/predict`: Breast cancer prediction endpoint
 
 ### Endpoint: POST `/predict`
 
-**Request Body:**
+**Request Body (all 30 breast cancer features):**
 
 ```json
 {
-  "Gender": "Male",
-  "Age": 30,
-  "HasDrivingLicense": 1,
-  "RegionID": 1.0,
-  "Switch": 0,
-  "PastAccident": "No",
-  "AnnualPremium": 25000.0
+  "mean_radius": 17.99,
+  "mean_texture": 10.38,
+  "mean_perimeter": 122.8,
+  "mean_area": 1001.0,
+  "mean_smoothness": 0.1184,
+  "mean_compactness": 0.2776,
+  "mean_concavity": 0.3001,
+  "mean_concave_points": 0.1471,
+  "mean_symmetry": 0.2419,
+  "mean_fractal_dimension": 0.07871,
+  "radius_error": 1.095,
+  "texture_error": 0.9053,
+  "perimeter_error": 8.589,
+  "area_error": 153.4,
+  "smoothness_error": 0.006399,
+  "compactness_error": 0.04904,
+  "concavity_error": 0.05373,
+  "concave_points_error": 0.01587,
+  "symmetry_error": 0.03003,
+  "fractal_dimension_error": 0.006193,
+  "worst_radius": 25.38,
+  "worst_texture": 17.33,
+  "worst_perimeter": 184.6,
+  "worst_area": 2019.0,
+  "worst_smoothness": 0.1622,
+  "worst_compactness": 0.6656,
+  "worst_concavity": 0.7119,
+  "worst_concave_points": 0.2654,
+  "worst_symmetry": 0.4601,
+  "worst_fractal_dimension": 0.1189
 }
 ```
 
@@ -180,9 +235,21 @@ The FastAPI application provides a REST endpoint for predictions:
 
 ```json
 {
-  "predicted_class": 1
+  "predicted_class": 0,
+  "diagnosis": "Malignant",
+  "confidence": {
+    "malignant_probability": 0.85,
+    "benign_probability": 0.15
+  },
+  "confidence_score": 0.85
 }
 ```
+
+**Target Classes:**
+
+- `0`: Malignant (cancerous)
+- `1`: Benign (non-cancerous)
+
 
 ## 🐳 Docker Deployment
 
@@ -190,7 +257,7 @@ Build and run the application using Docker:
 
 ```bash
 docker build -t mlops-project .
-docker run -p 8000:80 mlops-project
+docker run -p 8000:8000 mlops-project
 ```
 
 ## 🧪 Testing

@@ -1,0 +1,14 @@
+artifact_uri: file:///media/benjamin/Titan-micro/code/mlops-project/mlruns/615097832788909457/24e269ac9f4e4c539d04b628950491d6/artifacts
+end_time: 1753033872448
+entry_point_name: ''
+experiment_id: '615097832788909457'
+lifecycle_stage: active
+run_id: 24e269ac9f4e4c539d04b628950491d6
+run_name: powerful-sheep-590
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1753033868740
+status: 4
+tags: []
+user_id: benjamin

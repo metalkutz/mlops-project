@@ -1,0 +1,10 @@
+artifact_location: file:///media/benjamin/Titan-micro/code/mlops-project/mlruns/615097832788909457/models/m-e39ace6bdb5d44fd88f23b6da3c7efeb/artifacts
+creation_timestamp: 1753033888960
+experiment_id: '615097832788909457'
+last_updated_timestamp: 1753033893123
+model_id: m-e39ace6bdb5d44fd88f23b6da3c7efeb
+model_type: null
+name: model
+source_run_id: 15b447a44e9f4a5cbfebeabec899d708
+status: 2
+status_message: null

@@ -3,7 +3,7 @@ import yaml
 import mlflow
 import mlflow.sklearn
 from steps.ingest import Ingestion
-from steps.clean import Cleaner
+from steps.preprocessing import Preprocess_data
 from steps.train import Trainer
 from steps.predict import Predictor
 from sklearn.metrics import classification_report
@@ -17,11 +17,11 @@ def main():
     train, test = ingestion.load_data()
     logging.info("Data ingestion completed successfully")
 
-    # Clean data
-    cleaner = Cleaner()
-    train_data = cleaner.clean_data(train)
-    test_data = cleaner.clean_data(test)
-    logging.info("Data cleaning completed successfully")
+    # Preprocess data
+    preprocessor = Preprocess_data()
+    train_data = preprocessor.preprocess_data(train)
+    test_data = preprocessor.preprocess_data(test)
+    logging.info("Data preprocessing completed successfully")
 
     # Prepare and train model
     trainer = Trainer()
@@ -57,11 +57,11 @@ def train_with_mlflow():
         train, test = ingestion.load_data()
         logging.info("Data ingestion completed successfully")
 
-        # Clean data
-        cleaner = Cleaner()
-        train_data = cleaner.clean_data(train)
-        test_data = cleaner.clean_data(test)
-        logging.info("Data cleaning completed successfully")
+        # Preprocess data
+        preprocessor = Preprocess_data()
+        train_data = preprocessor.preprocess_data(train)
+        test_data = preprocessor.preprocess_data(test)
+        logging.info("Data preprocessing completed successfully")
 
         # Prepare and train model
         trainer = Trainer()
@@ -78,8 +78,8 @@ def train_with_mlflow():
         logging.info("Model evaluation completed successfully")
         
         # Tags 
-        mlflow.set_tag('Model developer', 'prsdm')
-        mlflow.set_tag('preprocessing', 'OneHotEncoder, Standard Scaler, and MinMax Scaler')
+        mlflow.set_tag('Model developer', 'metalkutz')
+        mlflow.set_tag('preprocessing', 'Standard Scaler')
         
         # Log metrics
         model_params = config['model']['params']
@@ -96,7 +96,7 @@ def train_with_mlflow():
         mlflow.sklearn.log_model(trainer.pipeline, "model", input_example=input_example)
                 
         # Register the model using the 'name' parameter
-        model_name = "insurance_model" 
+        model_name = "breast_cancer_model" 
         model_uri = f"runs:/{run.info.run_id}/model"
         mlflow.register_model(model_uri, name=model_name)
 

@@ -1,0 +1,14 @@
+artifact_uri: file:///media/benjamin/Titan-micro/code/mlops-project/mlruns/615097832788909457/c8fadf2ddded4163930477fa07215b41/artifacts
+end_time: 1753034539394
+entry_point_name: ''
+experiment_id: '615097832788909457'
+lifecycle_stage: active
+run_id: c8fadf2ddded4163930477fa07215b41
+run_name: calm-bee-432
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1753034534584
+status: 3
+tags: []
+user_id: benjamin

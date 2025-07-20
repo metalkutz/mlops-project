@@ -1,0 +1,14 @@
+artifact_uri: file:///media/benjamin/Titan-micro/code/mlops-project/mlruns/615097832788909457/15b447a44e9f4a5cbfebeabec899d708/artifacts
+end_time: 1753033893184
+entry_point_name: ''
+experiment_id: '615097832788909457'
+lifecycle_stage: active
+run_id: 15b447a44e9f4a5cbfebeabec899d708
+run_name: calm-skink-301
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1753033888675
+status: 3
+tags: []
+user_id: benjamin
