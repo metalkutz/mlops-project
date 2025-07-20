@@ -1,0 +1,14 @@
+artifact_uri: file:///media/benjamin/Titan-micro/code/mlops-project/mlruns/364498872222416186/8ee606988f7046cd9f64fe37a591c849/artifacts
+end_time: 1753025075469
+entry_point_name: ''
+experiment_id: '364498872222416186'
+lifecycle_stage: active
+run_id: 8ee606988f7046cd9f64fe37a591c849
+run_name: vaunted-cat-52
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1753025067530
+status: 3
+tags: []
+user_id: benjamin

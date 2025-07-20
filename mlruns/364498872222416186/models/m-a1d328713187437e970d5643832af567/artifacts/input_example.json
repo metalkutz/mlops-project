@@ -1,0 +1,1 @@
+{"columns": ["Gender", "Age", "HasDrivingLicense", "RegionID", "Switch", "PastAccident", "AnnualPremium"], "data": [["Male", 27.0, 1.0, 21.0, -1.0, "Unknown", 1510.65], ["Female", 23.0, 1.0, 6.0, -1.0, "Unknown", 2014.1], ["Female", 50.0, 1.0, 15.0, -1.0, "Yes", 131.5], ["Male", 40.0, 1.0, 29.0, 0.0, "Yes", 1371.85], ["Male", 52.0, 1.0, 19.0, -1.0, "Unknown", 1891.5]]}

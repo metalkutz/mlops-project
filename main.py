@@ -88,12 +88,17 @@ def train_with_mlflow():
         mlflow.log_metric("roc", float(roc_auc_score))
         mlflow.log_metric('precision', float(report['weighted avg']['precision']))
         mlflow.log_metric('recall', float(report['weighted avg']['recall']))
-        mlflow.sklearn.log_model(trainer.pipeline, "model")
+        # Provide an input_example for signature inference
+        input_example = X_test[:5].copy()
+        # Convert integer columns to float64 to avoid schema enforcement errors
+        for col in input_example.select_dtypes(include='int').columns:
+            input_example[col] = input_example[col].astype('float64')
+        mlflow.sklearn.log_model(trainer.pipeline, "model", input_example=input_example)
                 
-        # Register the model
+        # Register the model using the 'name' parameter
         model_name = "insurance_model" 
         model_uri = f"runs:/{run.info.run_id}/model"
-        mlflow.register_model(model_uri, model_name)
+        mlflow.register_model(model_uri, name=model_name)
 
         logging.info("MLflow tracking completed successfully")
 

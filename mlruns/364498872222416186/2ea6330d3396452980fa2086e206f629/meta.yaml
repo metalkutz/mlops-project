@@ -1,0 +1,14 @@
+artifact_uri: file:///media/benjamin/Titan-micro/code/mlops-project/mlruns/364498872222416186/2ea6330d3396452980fa2086e206f629/artifacts
+end_time: 1753024894451
+entry_point_name: ''
+experiment_id: '364498872222416186'
+lifecycle_stage: active
+run_id: 2ea6330d3396452980fa2086e206f629
+run_name: mercurial-snail-84
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1753024860896
+status: 3
+tags: []
+user_id: benjamin
